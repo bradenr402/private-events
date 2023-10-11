@@ -1,0 +1,12 @@
+<h1><%= @event.title %></h1>
+
+<h3>Event Creator:</h3>
+<p><%= @event.creator.name %> (<%= link_to @event.creator.email, 'mailto:#{@event.creator.email}' %>)</p>
+
+<h3>Event Date:</h3>
+<p><%= @event.datetime.strftime('%A, %B %e, %Y at %l:%M %p') %></p>
+
+<h3>Event Location:</h3>
+<p><%= @event.location %></p>
+
+<p><%= link_to 'Back to all events', events_path %></p>
