@@ -1,19 +1,42 @@
-<h1>My Events</h1>
-<ul>
-  <% @user.created_events.each do |event| %>
-    <li>
-      <%= link_to event.title, event %>
-    </li>
-  <% end %>
-</ul>
-<%= link_to 'New Event', new_event_path %>
+<% @user = User.find(params[:id])%>
+<% if @user == current_user %>
+  <h1>My Events</h1>
+  <ul>
+    <% @user.created_events.each do |event| %>
+      <li>
+        <%= link_to event.title, event %>
+      </li>
+    <% end %>
+  </ul>
+  <%= link_to 'New Event', new_event_path %>
 
-<h2>Events I'm Attending</h2>
-<ul>
-  <% @user.attended_events.each do |event| %>
-    <li>
-      <%= link_to event.title, event %>
-    </li>
-  <% end %>
-</ul>
-<%= link_to 'Back', events_path %>
+  <h2>Events I'm Attending</h2>
+  <ul>
+    <% @user.attended_events.each do |event| %>
+      <li>
+        <%= link_to event.title, event %>
+      </li>
+    <% end %>
+  </ul>
+  <%= link_to 'Back', events_path %>
+
+<% else %>
+  <h1><%= @user.name.possessive %> Events</h1>
+  <ul>
+    <% @user.created_events.each do |event| %>
+      <li>
+        <%= link_to event.title, event %>
+      </li>
+    <% end %>
+  </ul>
+
+  <h2>Events <%= @user.name %> is Attending</h2>
+  <ul>
+    <% @user.attended_events.each do |event| %>
+      <li>
+        <%= link_to event.title, event %>
+      </li>
+    <% end %>
+  </ul>
+  <%= link_to 'Back', events_path %>
+<% end %>

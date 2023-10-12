@@ -1,8 +1,9 @@
 <h1>Events</h1>
 
 <% if user_signed_in? %>
-  <p>Current user: <%= current_user.name %></p>
-  <%= link_to 'My Page', user_path(current_user) %><br />
+  <p>Current user: <%= current_user.name %> |
+    <%= link_to 'My Page', user_path(current_user) %>
+  </p>
   <%= link_to 'Sign Out', sign_out_path_url, method: :delete %><br />
   <%= link_to 'New Event', new_event_path %>
 <% else %>
@@ -10,7 +11,7 @@
 <% end %>
 
 <ul>
-  <% @events.each do |event| %>
+  <% @events.sort_by(&:datetime).each do |event| %>
     <li>
       <%= link_to event.title, event %> — <%= event.datetime.strftime('%a, %b %e @ %l:%M %p') %>
       <div>created by <%= event.creator.name %></div><br />
