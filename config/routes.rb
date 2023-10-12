@@ -10,6 +10,11 @@ Rails.application.routes.draw do
 
   root "events#index"
 
-  resources :events
-  resources :users
+  resources :events do
+    member do
+      get 'attend'
+      get 'unattend'
+    end
+  end
+  resources :users, only: [:show]
 end

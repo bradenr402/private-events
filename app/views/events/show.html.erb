@@ -1,12 +1,30 @@
 <h1><%= @event.title %></h1>
 
-<h3>Event Creator:</h3>
-<p><%= @event.creator.name %> (<%= link_to @event.creator.email, 'mailto:#{@event.creator.email}' %>)</p>
+<p><strong>Event Creator:</strong> <%= @event.creator.name %> (<%= link_to @event.creator.email, 'mailto:#{@event.creator.email}' %>)</p>
 
-<h3>Event Date:</h3>
-<p><%= @event.datetime.strftime('%A, %B %e, %Y at %l:%M %p') %></p>
+<p><strong>Event Date:</strong> <%= @event.datetime.strftime('%A, %B %e, %Y at %l:%M %p') %></p>
 
-<h3>Event Location:</h3>
-<p><%= @event.location %></p>
+<p><strong>Event Location:</strong> <%= @event.location %></p>
 
-<p><%= link_to 'Back to all events', events_path %></p>
+<p><strong>Event Attendees:</strong></p>
+<ul>
+<% @event.attendees.each do |attendee| %>
+  <% unless attendee == current_user %>
+    <li>
+      <%= attendee.name %>
+    </li>
+  <% end %>
+<% end %>
+</ul>
+
+<%= link_to 'Back', events_path %> |
+
+<% if current_user == @event.creator %>
+  <%= link_to 'Edit', edit_event_path %> |
+  <%= link_to 'Delete', event_path, method: :delete %>
+<% elsif @event.attendees.include?(current_user) %>
+  <%= link_to 'Cancel RSVP', unattend_event_path %>
+  <p>You're attending this event.</p>
+<% else %>
+  <%= link_to 'RSVP', attend_event_path unless @event.datetime < Time.now %>
+<% end %>
