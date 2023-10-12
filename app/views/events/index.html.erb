@@ -10,8 +10,19 @@
     <%= link_to 'Sign In', sign_in_path_url%>
 <% end %>
 
+<h3>Upcoming Events</h3>
 <ul>
-  <% @events.sort_by(&:datetime).each do |event| %>
+  <% @events.upcoming.each do |event| %>
+    <li>
+      <%= link_to event.title, event %> — <%= event.datetime.strftime('%a, %b %e @ %l:%M %p') %>
+      <div>created by <%= event.creator.name %></div><br />
+    </li>
+  <% end %>
+</ul>
+
+<h3>Past Events</h3>
+<ul>
+  <% @events.past.each do |event| %>
     <li>
       <%= link_to event.title, event %> — <%= event.datetime.strftime('%a, %b %e @ %l:%M %p') %>
       <div>created by <%= event.creator.name %></div><br />

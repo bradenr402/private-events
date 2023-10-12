@@ -16,5 +16,5 @@ Rails.application.routes.draw do
       get 'unattend'
     end
   end
-  resources :users #, only: [:show]
+  resources :users, only: [:show]
 end
