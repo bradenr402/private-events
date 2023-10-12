@@ -2,6 +2,7 @@
 
 <% if user_signed_in? %>
   <p>Current user: <%= current_user.name %></p>
+  <%= link_to 'My Page', user_path(current_user) %><br />
   <%= link_to 'Sign Out', sign_out_path_url, method: :delete %><br />
   <%= link_to 'New Event', new_event_path %>
 <% else %>
