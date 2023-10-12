@@ -21,7 +21,7 @@
 
 <% if current_user == @event.creator %>
   <%= link_to 'Edit', edit_event_path %> |
-  <%= link_to 'Delete', event_path, method: :delete %>
+  <%= link_to 'Delete', event_path(@event), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this event?" } %>
 <% elsif @event.attendees.include?(current_user) %>
   <%= link_to 'Cancel RSVP', unattend_event_path unless @event.datetime < Time.now %>
   <p>You're attending this event.</p>
