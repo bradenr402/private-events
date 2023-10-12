@@ -6,5 +6,5 @@ class Event < ApplicationRecord
   has_many :attendees, through: :event_attendances, source: :attendee
 
   scope :past, -> { where('datetime < ?', Time.now).order(datetime: :desc) }
-  scope :upcoming, -> { where('datetime > ?', Time.now).order(datetime: :desc) }
+  scope :upcoming, -> { where('datetime > ?', Time.now).order(datetime: :asc) }
 end

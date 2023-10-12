@@ -1,15 +1,9 @@
-<h1>Events</h1>
-
+<%= render 'nav' %>
 <% if user_signed_in? %>
-  <p>Current user: <%= current_user.name %> |
-    <%= link_to 'My Page', user_path(current_user) %>
-  </p>
-  <%= link_to 'Sign Out', sign_out_path_url, method: :delete %><br />
-  <%= link_to 'New Event', new_event_path %>
+  <h1>Hello, <%= current_user.name %>!</h1>
 <% else %>
-    <%= link_to 'Sign In', sign_in_path_url%>
+  <h1>Welcome!</h1>
 <% end %>
-
 <h3>Upcoming Events</h3>
 <ul>
   <% @events.upcoming.each do |event| %>

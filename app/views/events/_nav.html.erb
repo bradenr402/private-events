@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+  <nav>
+    <%= link_to 'Home', events_path %> |
+    <%= link_to 'Profile', user_path(current_user) %> |
+    <%= link_to 'New Event', new_event_path %> |
+    <%= link_to 'Sign Out', sign_out_path_url, method: :delete %>
+  </nav>
+<% else %>
+  <nav>
+    <%= link_to 'Home', events_path %> |
+    <%= link_to 'Sign In', sign_in_path_url%>
+  </nav>
+<% end %>

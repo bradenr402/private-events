@@ -1,3 +1,5 @@
+<%= render 'nav' %>
+
 <h1><%= @event.title %></h1>
 
 <p><strong>Event Creator:</strong> <%= link_to @event.creator.name, user_path(@event.creator) %> (<%= link_to @event.creator.email, 'mailto:#{@event.creator.email}' %>)</p>
@@ -16,8 +18,6 @@
   <% end %>
 <% end %>
 </ul>
-
-<%= link_to 'Back', events_path %> |
 
 <% if current_user == @event.creator %>
   <%= link_to 'Edit', edit_event_path %> |
