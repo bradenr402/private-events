@@ -2,7 +2,7 @@
 <% if @user == current_user %>
   <h1>My Events</h1>
   <ul>
-    <% @user.created_events.each do |event| %>
+    <% @user.created_events.sort_by(&:datetime).each do |event| %>
       <li>
         <%= link_to event.title, event %>
       </li>
@@ -11,19 +11,28 @@
   <%= link_to 'New Event', new_event_path %>
 
   <h2>Events I'm Attending</h2>
+  <h3>Past Events</h3>
   <ul>
-    <% @user.attended_events.each do |event| %>
+    <% @user.attended_events.sort_by(&:datetime).select { |event| event.datetime < Time.now }.each do |event| %>
       <li>
         <%= link_to event.title, event %>
       </li>
     <% end %>
   </ul>
-  <%= link_to 'Back', events_path %>
+
+  <h3>Upcoming Events</h3>
+  <ul>
+    <% @user.attended_events.sort_by(&:datetime).select { |event| event.datetime > Time.now }.each do |event| %>
+      <li>
+        <%= link_to event.title, event %>
+      </li>
+    <% end %>
+  </ul>
 
 <% else %>
   <h1><%= @user.name.possessive %> Events</h1>
   <ul>
-    <% @user.created_events.each do |event| %>
+    <% @user.created_events.sort_by(&:datetime).each do |event| %>
       <li>
         <%= link_to event.title, event %>
       </li>
@@ -31,12 +40,22 @@
   </ul>
 
   <h2>Events <%= @user.name %> is Attending</h2>
+  <h3>Past Events</h3>
   <ul>
-    <% @user.attended_events.each do |event| %>
+    <% @user.attended_events.sort_by(&:datetime).select { |event| event.datetime < Time.now }.each do |event| %>
       <li>
         <%= link_to event.title, event %>
       </li>
     <% end %>
   </ul>
-  <%= link_to 'Back', events_path %>
+
+  <h3>Upcoming Events</h3>
+  <ul>
+    <% @user.attended_events.sort_by(&:datetime).select { |event| event.datetime > Time.now }.each do |event| %>
+      <li>
+        <%= link_to event.title, event %>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
+<%= link_to 'Back', events_path %>

@@ -23,7 +23,7 @@
   <%= link_to 'Edit', edit_event_path %> |
   <%= link_to 'Delete', event_path, method: :delete %>
 <% elsif @event.attendees.include?(current_user) %>
-  <%= link_to 'Cancel RSVP', unattend_event_path %>
+  <%= link_to 'Cancel RSVP', unattend_event_path unless @event.datetime < Time.now %>
   <p>You're attending this event.</p>
 <% else %>
   <%= link_to 'RSVP', attend_event_path unless @event.datetime < Time.now %>
