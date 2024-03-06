@@ -1,3 +1,3 @@
-# README
+# Project: Private Events
 
-This is part of the Private Events Project in The Odin Project’s Ruby on Rails Curriculum. Find it at http://www.theodinproject.com
+This is my solution for the Project: Private Events in The Odin Project’s Ruby on Rails Curriculum. Find it at https://www.theodinproject.com/lessons/ruby-on-rails-private-events.
